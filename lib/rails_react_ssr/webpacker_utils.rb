@@ -52,7 +52,7 @@ module RailsReactSSR
 
       Rails.logger.debug "Reading remote bundle #{uri}"
 
-      open uri
+      URI(uri).open
     rescue OpenURI::HTTPError => e
       # On the first page hit my not be available on the dev server so we need to wait for it to compile
       if tries < max_tries

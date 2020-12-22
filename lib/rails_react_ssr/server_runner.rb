@@ -39,7 +39,7 @@ const recordedLogs = [];
       output = nil
 
       begin
-        js = Tempfile.new [File.basename(bundle_file, '.*'), File.extname(bundle_file)]
+        js = Tempfile.new [File.basename(bundle_file, '.*'), File.extname(bundle_file)], Rails.root.join('public/packs')
 
         begin
           write_console_polyfill js
@@ -47,7 +47,6 @@ const recordedLogs = [];
           write_bundle js, bundle_file
 
           js.flush
-
           if outputTemp
             outputTemp = Rails.root.join('tmp/ssr/', bundle) if outputTemp.is_a? TrueClass
 
@@ -96,14 +95,13 @@ const recordedLogs = [];
 
     def self.write_props_polyfill(temp_file, props)
       ## Format the properties for js
-      jsProps = props.inject({}) do |hash,(k,v)|
-        hash[k.to_s.camelcase.gsub(/\A./, &:downcase)] = v
-        hash
-      end
+      # jsProps = props.inject({}) do |hash,(k,v)|
+      #   hash[k.to_s.camelcase.gsub(/\A./, &:downcase)] = v
+      #   hash
+      # end
 
       temp_file.write <<-JS
-const serverProps = #{ActiveSupport::JSON.encode jsProps};
-
+        const serverProps = #{ActiveSupport::JSON.encode props};
       JS
     end
 
