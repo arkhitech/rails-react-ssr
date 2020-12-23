@@ -7,7 +7,8 @@ module RailsReactSSR
     def self.hashed_bundle_name!(bundle)
       Webpacker.manifest.lookup! bundle
     rescue Webpacker::Manifest::MissingEntryError
-      raise RailsReactSSR::MissingBundleError.new(bundle, "The ReactJS package '#{bundle}' is missing from the manifest.json file.")
+      "packs/#{bundle}"
+      #raise RailsReactSSR::MissingBundleError.new(bundle, "The ReactJS package '#{bundle}' is missing from the manifest.json file.")
     end
 
     ##
@@ -29,15 +30,15 @@ module RailsReactSSR
 
     def self.dev_bundle_uri(path)
       URI::Generic.new(
-          Webpacker.dev_server.protocol,
-          nil,
-          Webpacker.dev_server.host,
-          Webpacker.dev_server.port,
-          nil,
-          path,
-          nil,
-          nil,
-          nil
+        Webpacker.dev_server.protocol,
+        nil,
+        Webpacker.dev_server.host,
+        Webpacker.dev_server.port,
+        nil,
+        path,
+        nil,
+        nil,
+        nil
       ).to_s
     end
 

@@ -11,17 +11,17 @@ module RailsReactSSR
   class ServerRunner
     ##
     # Redirect console output to be logged by an array
-    CONSOLE_POLYFILL = <<-CONSOLE_POLYFILL
-const stdout = console.log;
-const stderr = console.error;
-
-const recordedLogs = [];
-
-['log', 'info', 'debug', 'warn', 'error'].forEach(level => {
-    console[level] = (...args) => {
-        recordedLogs.push({ level: level, args: args });
-    }
-});
+    CONSOLE_POLYFILL = <<~CONSOLE_POLYFILL
+      const stdout = console.log;
+      const stderr = console.error;
+      
+      const recordedLogs = [];
+      
+      ['log', 'info', 'debug', 'warn', 'error'].forEach(level => {
+          console[level] = (...args) => {
+              recordedLogs.push({ level: level, args: args });
+          }
+      });
     CONSOLE_POLYFILL
 
     ##
@@ -47,6 +47,7 @@ const recordedLogs = [];
           write_bundle js, bundle_file
 
           js.flush
+          
           if outputTemp
             outputTemp = Rails.root.join('tmp/ssr/', bundle) if outputTemp.is_a? TrueClass
 
