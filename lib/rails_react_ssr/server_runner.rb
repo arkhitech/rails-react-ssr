@@ -39,7 +39,7 @@ module RailsReactSSR
       output = nil
 
       begin
-        js = Tempfile.new [File.basename(bundle_file, '.*'), File.extname(bundle_file)], Rails.root.join('public/packs')
+        js = Tempfile.new [File.basename(bundle_file, '.*'), File.extname(bundle_file)], Webpacker.config.public_output_path.to_s
 
         begin
           write_console_polyfill js

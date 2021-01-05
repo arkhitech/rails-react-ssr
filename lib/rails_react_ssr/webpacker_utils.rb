@@ -7,7 +7,7 @@ module RailsReactSSR
     def self.hashed_bundle_name!(bundle)
       Webpacker.manifest.lookup! bundle
     rescue Webpacker::Manifest::MissingEntryError
-      "packs/#{bundle}"
+      "/#{Webpacker.config.public_output_path.split.last}/#{bundle}"
       #raise RailsReactSSR::MissingBundleError.new(bundle, "The ReactJS package '#{bundle}' is missing from the manifest.json file.")
     end
 

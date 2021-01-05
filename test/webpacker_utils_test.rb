@@ -41,10 +41,10 @@ class RailsReactSSR::WebpackerUtilsTest < RailsReactSSR::Test
   private
 
   def raw_application_js
-    <<-AppplicaitonJS
-console.log('Hello World from Webpacker');
-
-stdout('<html><body>Hello from the server</body></html>');
+    <<~AppplicaitonJS
+      console.log('Hello World from Webpacker');
+      
+      stdout('<html><body>Hello from the server</body></html>');
     AppplicaitonJS
   end
 end
