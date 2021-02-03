@@ -49,6 +49,8 @@ module RailsReactSSR
           js.flush
           
           if outputTemp
+            require 'fileutils'
+            FileUtils.mkdir_p Rails.root.join('tmp/ssr/')
             outputTemp = Rails.root.join('tmp/ssr/', bundle) if outputTemp.is_a? TrueClass
 
             Rails.logger.debug "Coping server bundle to #{outputTemp}"
