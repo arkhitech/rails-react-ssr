@@ -53,7 +53,7 @@ module RailsReactSSR
             FileUtils.mkdir_p Rails.root.join('tmp/ssr/')
             outputTemp = Rails.root.join('tmp/ssr/', bundle) if outputTemp.is_a? TrueClass
 
-            Rails.logger.debug "Coping server bundle to #{outputTemp}"
+            # Rails.logger.debug "Coping server bundle to #{outputTemp}"
             IO.copy_stream js.path, outputTemp
           end
 
@@ -87,7 +87,7 @@ module RailsReactSSR
         error = err.read
 
         Rails.logger.info "[#{thr.value.exitstatus}}] #{cmd_str}"
-        Rails.logger.debug output
+        # Rails.logger.debug output
         Rails.logger.error error unless error.nil? || error.empty?
 
         thr.value.exitstatus
